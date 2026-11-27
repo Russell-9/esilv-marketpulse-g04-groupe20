@@ -1,6 +1,8 @@
 def index_by_date(prices):
-    pass
-
+    return {
+        row["date"]: row
+        for row in prices
+    }
 
 def align_series(instrument_prices, benchmark_prices):
     pass

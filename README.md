@@ -6,7 +6,7 @@
     alt="ESILV - De Vinci Higher Education"
     width="100"
   />
-</p>
+</p> 
 
 [![Course: MESIFI472326](https://img.shields.io/badge/course-MESIFI472326-1f6feb.svg)](docs/06_TD_SEQUENCE_AND_LEARNING_PATH.md)
 [![ESILV A4](https://img.shields.io/badge/ESILV-A4-111827.svg)](docs/00_MARKETPULSE_FUNCTIONAL_CONTRACT.md)

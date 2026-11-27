@@ -29,11 +29,6 @@ def calculate_period_return(prices):
     last_close = prices[-1]["close"]
 
     return (last_close / first_close - 1) * 100
-    
-
-
-def calculate_period_return(prices):
-    pass
 
 
 def calculate_relative_performance(instrument_return, benchmark_return):

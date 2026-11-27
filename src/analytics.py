@@ -11,8 +11,8 @@ def calculate_period_return(prices):
 
 
 def calculate_relative_performance(instrument_return, benchmark_return):
-    pass
+     return instrument_return - benchmark_return
 
 
 def calculate_base_100(prices):
-    pass
+    return 100 * prices / prices.iloc[0]

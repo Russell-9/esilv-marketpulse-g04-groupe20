@@ -6,22 +6,22 @@ Copy this file to `TEAM.md` in your team repository and complete it before start
 
 - Module: MESIFI472326 - Python, Git, Linux
 - TD Group: G04
-- MarketPulse Team: TXX
+- MarketPulse Team: T20
 
 ## Members
 
 | Full name | GitHub username |
 |---|---|
-| Student 1 | @github-user-1 |
-| Student 2 | @github-user-2 |
-| Student 3 | @github-user-3 |
+| Student 1 | @Russell-9 |
+| Student 2 | @kavinthanrasenthiram |
+| Student 3 | @abbeslina-create|
 
 Add a fourth row only if your team has four members.
 
 ## Repository
 
-- Team repository: `esilv-marketpulse-g04-tYY`
-- Upstream repository: `FarelWT/esilv-marketpulse-g04-txx`
+- Team repository: `esilv-marketpulse-g04-t20`
+- Upstream repository: `FarelWT/esilv-marketpulse-g04-t20`
 
 ## Market choice
 

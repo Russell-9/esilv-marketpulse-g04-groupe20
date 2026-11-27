@@ -15,7 +15,7 @@ def calculate_relative_performance(instrument_return, benchmark_return):
 
 
 def calculate_base_100(prices):
-    first_close = prices[0].["close"]
+    first_close = prices[0]["close"]
     result = []
 
     for row in prices:

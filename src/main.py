@@ -2,6 +2,12 @@ from pathlib import Path
 import csv
 import json
 
+from analytics import (
+    align_series,
+    calculate_base_100,
+    calculate_period_return,
+    calculate_relative_performance,
+)
 
 DATA_DIR = Path("data/sample")
 
@@ -42,32 +48,60 @@ def main():
     instruments = load_instruments()
     prices = load_prices()
 
+    normalized_prices = [normalize_price_row(row) for row in prices]
+
     instrument = instruments["instrument"]
     benchmark = instruments["benchmark"]
 
-    instrument_prices = filter_prices(prices, instrument["ticker"])
-    benchmark_prices = filter_prices(prices, benchmark["ticker"])
+    instrument_prices = filter_prices(normalized_prices, instrument["ticker"])
+    benchmark_prices = filter_prices(normalized_prices, benchmark["ticker"])
 
-    instrument_latest = instrument_prices[-1]
-    benchmark_latest = benchmark_prices[-1]
+    aligned_instrument, aligned_benchmark = align_series(
+        instrument_prices,
+        benchmark_prices,
+    )
+
+    instrument_return = calculate_period_return(aligned_instrument)
+    benchmark_return = calculate_period_return(aligned_benchmark)
+    relative_performance = calculate_relative_performance(
+        instrument_return,
+        benchmark_return,
+    )
+
+    instrument_base_100 = calculate_base_100(aligned_instrument)
+    benchmark_base_100 = calculate_base_100(aligned_benchmark)
 
     print("=== MarketPulse ===")
     print()
+    print("Market configuration")
+    print(f"Period   : {LOOKBACK_LABEL}")
+    print(f"Interval : {INTERVAL_LABEL}")
+    print()
     print("Instrument")
     print(f"{instrument['ticker']} - {instrument['name']}")
-    print(f"Last price: {instrument_latest['close']} {instrument['currency']}")
+    print(f"Period return : {instrument_return:.2f}%")
     print()
     print("Benchmark")
     print(f"{benchmark['ticker']} - {benchmark['name']}")
-    print(f"Last level: {benchmark_latest['close']}")
+    print(f"Period return : {benchmark_return:.2f}%")
     print()
-    print(f"Period: {LOOKBACK_LABEL}")
-    print(f"Interval: {INTERVAL_LABEL}")
+    print("Relative performance")
+    print(
+        f"{instrument['ticker']} vs {benchmark['ticker']} : "
+        f"{relative_performance:+.2f} percentage points"
+    )
     print()
-    print("Observations")
-    print(f"{instrument['ticker']}: {len(instrument_prices)}")
-    print(f"{benchmark['ticker']}: {len(benchmark_prices)}")
-
+    print("Base 100")
+    print(
+        f"{instrument['ticker']:<5} : "
+        f"{instrument_base_100[0]['value']:.2f} -> "
+        f"{instrument_base_100[-1]['value']:.2f}"
+    )
+    print(
+        f"{benchmark['ticker']:<5} : "
+        f"{benchmark_base_100[0]['value']:.2f} -> "
+        f"{benchmark_base_100[-1]['value']:.2f}"
+    )
 
 if __name__ == "__main__":
     main()

@@ -34,8 +34,18 @@ def calculate_period_return(prices):
 
 
 def calculate_relative_performance(instrument_return, benchmark_return):
-    pass
+     return instrument_return - benchmark_return
 
 
 def calculate_base_100(prices):
-    pass
+    first_close = prices[0]["close"]
+    result = []
+
+    for row in prices:
+        result.append({
+            "date": row["date"],
+            "ticker": row["ticker"],
+            "value": row["close"] / first_close * 100,
+        })
+    
+    return result
